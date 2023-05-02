@@ -26,6 +26,29 @@ body {
 
 #main {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#add_book {
+    font-size: 2rem;
+    background-color: var(--main_color);
+    border: none;
+    border-radius: 10px;
+    margin: 30px;
+    padding: 10px;   
+}
+
+#add_book:hover {
+    border: solid black 2px;
+}
+
+#card_section {
+    flex: auto;
+    height: 50px;
+    width: 100px;
+    background-color: aqua;
 }
 #footer {
     background-color: var(--main_color);
