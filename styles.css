@@ -1,0 +1,38 @@
+* {
+    --main_color : #d6d6d6;
+    --secondary_color : #fdfdff;
+    --text_color : black;
+    --main_font : 'Roboto', sans-serif;
+    margin : 0;
+    padding : 0;
+}
+body {
+    background-color: var(--main_color);
+    font-family: var(--main_font);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#header {
+    background-color: var(--secondary_color);
+    height: 10vh;
+}
+
+#title {
+    padding: 30px;
+    font-size: 2.5rem;
+}
+
+#main {
+    flex: 1;
+}
+#footer {
+    background-color: var(--main_color);
+    height: 5vh;
+}
+
+#made_by {
+    padding: 10px;
+    text-align: end;
+}
