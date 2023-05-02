@@ -33,7 +33,7 @@ body {
 #close {
     color: var(--secondary_color);
     float: right;
-    font-size: 28px;
+    font-size: 35px;
     font-weight: bold;
 }
 
@@ -47,27 +47,27 @@ body {
 #form_container {
     background-color: var(--main_color);
     border-radius: 10px;
+    padding: 20px;
     
 }
 form {
     display: flex;
     flex-direction: column;
-    padding: 60px;
+    padding: 20px;
     gap: 20px;
 }
 
 input {
-    width: 15rem;
+    width: 20rem;
     font-size: 1.5rem;
 }
 
 label {
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto; /* 15% from the top and centered */
     padding: 20px;
     width: 60%; /* Could be more or less, depending on screen size */
 }
