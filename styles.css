@@ -54,12 +54,13 @@ form {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    gap: 20px;
+    gap: 10px;
 }
 
 input {
     width: 20rem;
     font-size: 1.5rem;
+    border-radius: 10px;
 }
 
 label {
@@ -70,6 +71,20 @@ label {
     background-color: #fefefe;
     padding: 20px;
     width: 60%; /* Could be more or less, depending on screen size */
+}
+
+#submit_book {
+    width: 20rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    align-self: center;
+    background-color: var(--main_color);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#submit_book:hover {
+    background-color: var(--secondary_color);
 }
 
 #header {
