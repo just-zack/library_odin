@@ -10,7 +10,7 @@ let submitBook = document.getElementById('submit_book');
 let bookReadString = "Read";
 var span = document.querySelector("#close");
 
-let myLibrary = [{title: "How to say hello", author : "john j", pages: 245, read: false}, {title: "when chocolate", author: "Kristy", pages: 10, read: true},];
+let myLibrary = [];
 
 
 addBook.addEventListener('click', openModal);
@@ -149,5 +149,3 @@ function submit () {
     closeModal();
     clearForm();
 }
-
-displayCurrentLibrary();
