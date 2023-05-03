@@ -47,6 +47,24 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary() {
     myLibrary.push(new Book(bookTitle.value,bookAuthor.value,bookPages.value, 'not read'));
+    createBookCard ();
+
+}
+
+function createBookCard () {
+    const book = document.createElement('h3');
+    const cardTitle = document.createElement('h2');
+    const cardAuthor = document.createElement('h2');
+    const cardPages = document.createElement('h2');
+    book.classList.add('book_card');
+    book.innerText = "Book #" + (myLibrary.length);
+    cardTitle.innerText = "Title: " + bookTitle.value;
+    cardAuthor.innerText = "By: " + bookAuthor.value;
+    cardPages.innerText = "Page Count: " + bookPages.value;
+    cardSection.appendChild(book);
+    book.appendChild(cardTitle);
+    book.appendChild(cardAuthor);
+    book.appendChild(cardPages);
 }
 
 function submit () {
@@ -56,8 +74,23 @@ function submit () {
     clearForm();
 }
 
-function displayBooks () {
+function displayCurrentLibrary () {
     for (let i=0; i < myLibrary.length; i++) {
+        const book = document.createElement('h3');
+        const cardTitle = document.createElement('h2');
+        const cardAuthor = document.createElement('h2');
+        const cardPages = document.createElement('h2');
+        book.classList.add('book_card');
+        book.innerText = "Book #" + (i+1);
+        cardTitle.innerText = "Title: " + myLibrary[i].title;
+        cardAuthor.innerText = "By: " + myLibrary[i].author;
+        cardPages.innerText = "Page Count: " + myLibrary[i].pages;
+        cardSection.appendChild(book);
+        book.appendChild(cardTitle);
+        book.appendChild(cardAuthor);
+        book.appendChild(cardPages);
 
     }
 }
+
+displayCurrentLibrary();

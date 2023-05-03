@@ -104,6 +104,27 @@ label {
     align-items: center;
 }
 
+#card_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: auto;
+    width: 100%;
+    background-color: aqua;
+}
+
+.book_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: solid black 2px;
+    background-color: var(--secondary_color);
+    border-radius: 10px;
+    margin: 30px;
+    padding: 30px;
+    gap: 10px;
+    height: 50%;
+
+}
 #add_book {
     font-size: 2rem;
     background-color: var(--main_color);
@@ -117,12 +138,6 @@ label {
     border: solid black 2px;
 }
 
-#card_section {
-    flex: auto;
-    height: 50px;
-    width: 100%;
-    background-color: aqua;
-}
 #footer {
     background-color: var(--main_color);
     height: 5vh;
