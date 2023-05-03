@@ -10,6 +10,8 @@ let submitBook = document.getElementById('submit_book');
 let bookReadString = "Read";
 var span = document.querySelector("#close");
 
+
+
 let myLibrary = [];
 
 
@@ -68,13 +70,13 @@ function createBookCard () {
         const cardPages = document.createElement('h2');
         const cardRead = document.createElement('button');
         const removeBookBtn = document.createElement('button');
-        book.classList.add('book_card');
-        book.classList.add("book_" + myLibrary.length);
+        book.classList.add('book_card', "book_" + myLibrary.length);
         cardTitle.classList.add("book_" + myLibrary.length);
         cardAuthor.classList.add("book_" + myLibrary.length);
         cardPages.classList.add("book_" + myLibrary.length);
         cardRead.classList.add("book_" + myLibrary.length);
-        removeBookBtn.classList.add('book_' + myLibrary.length, 'remove_button');
+        removeBookBtn.classList.add('remove_button');
+        removeBookBtn.setAttribute('id', "book_" + myLibrary.length);
         book.innerText = "Book #" + (myLibrary.length);
         cardTitle.innerText = "Title: " + bookTitle.value;
         cardAuthor.innerText = "By: " + bookAuthor.value;
@@ -94,7 +96,9 @@ function createBookCard () {
         book.appendChild(removeBookBtn);
 }
 
-function removeBook () {
+
+
+/* function removeBook () {
     for (let i = 0; i < myLibrary.length; i++) {
         let removeBtn = document.querySelector('.book_' + [i])
         removeBtn.addEventListener('click', () => {
@@ -106,7 +110,7 @@ function removeBook () {
 //let readButton = document.querySelectorAll('.have_read');
 //let notReadButtons = document.querySelectorAll('.not_read');
 
-/*notReadButtons.forEach((button) => {
+notReadButtons.forEach((button) => {
     button.addEventListener('click', () => {
         notReadButtons.classList.remove('not_read'); 
     })
@@ -148,4 +152,14 @@ function submit () {
     overrideSubmit(event);
     closeModal();
     clearForm();
+    deleteBook();
+}
+function deleteBook () {
+    const removeBook = document.querySelectorAll('.remove_button');
+    removeBook.forEach((button) => {
+        button.addEventListener('click', () => {
+            const deleteItems = document.querySelectorAll('.' + button.id);
+            deleteItems.forEach(element => element.remove());
+        })
+    })
 }
