@@ -8,14 +8,17 @@ let bookPages = document.getElementById('pages');
 let submitBook = document.getElementById('submit_book');
 var span = document.querySelector("#close");
 
+let myLibrary = [{title: "How to say hello", author : "john j", pages: 245, read: "not read"}, {title: "when chocolate", author: "Kristy", pages: 10, read: "not read"},];
+
+
 addBook.addEventListener('click', openModal);
 span.addEventListener('click', closeModal);
+submitBook.addEventListener('click' , submit);
 window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
 }
-submitBook.addEventListener('click' , submit);
 
 function openModal () {
     modal.style.display = "flex";
@@ -23,13 +26,6 @@ function openModal () {
 
 function closeModal () {
     modal.style.display = "none";
-}
-
-function submit () {
-    addBookToLibrary();
-    overrideSubmit(event);
-    closeModal();
-    clearForm();
 }
 
 function overrideSubmit (event) {
@@ -42,8 +38,6 @@ function overrideSubmit (event) {
     bookPages.value = "";
  }
 
-let myLibrary = [{title: "How to say hello", author : "john j", pages: 245, read: "not read"}, {title: "when chocolate", author: "Kristy", pages: 10, read: "not read"},];
-
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -55,11 +49,15 @@ function addBookToLibrary() {
     myLibrary.push(new Book(bookTitle.value,bookAuthor.value,bookPages.value, 'not read'));
 }
 
-console.log(myLibrary)
-/*function displayBooks () {
+function submit () {
+    addBookToLibrary();
+    overrideSubmit(event);
+    closeModal();
+    clearForm();
+}
+
+function displayBooks () {
     for (let i=0; i < myLibrary.length; i++) {
-        const book[i] = document.createElement('div');
 
     }
 }
-*/
