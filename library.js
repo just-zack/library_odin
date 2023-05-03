@@ -10,7 +10,7 @@ let submitBook = document.getElementById('submit_book');
 let bookReadString = "Read";
 var span = document.querySelector("#close");
 
-let myLibrary = [{title: "How to say hello", author : "john j", pages: 245, read: "Not read"}, {title: "when chocolate", author: "Kristy", pages: 10, read: "Not read"},];
+let myLibrary = [{title: "How to say hello", author : "john j", pages: 245, read: false}, {title: "when chocolate", author: "Kristy", pages: 10, read: true},];
 
 
 addBook.addEventListener('click', openModal);
@@ -47,12 +47,16 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-function addBookToLibrary() {
+function checkIfRead () {
     if (bookRead.checked === false) {
         bookReadString = "Not Read"
-    };
+    } else bookReadString = "Read";
+}
+
+function addBookToLibrary() {
+    checkIfRead();
     if (bookTitle.value !== "" && bookAuthor.value !== "" && bookPages.value !== "") {
-        myLibrary.push(new Book(bookTitle.value,bookAuthor.value,bookPages.value,bookReadString));
+        myLibrary.push(new Book(bookTitle.value,bookAuthor.value,bookPages.value,bookRead.checked));
         createBookCard ();
     } else alert ("You're missing information!");
 }
@@ -63,25 +67,55 @@ function createBookCard () {
         const cardAuthor = document.createElement('h2');
         const cardPages = document.createElement('h2');
         const cardRead = document.createElement('button');
+        const removeBookBtn = document.createElement('button');
         book.classList.add('book_card');
+        book.classList.add("book_" + myLibrary.length);
+        cardTitle.classList.add("book_" + myLibrary.length);
+        cardAuthor.classList.add("book_" + myLibrary.length);
+        cardPages.classList.add("book_" + myLibrary.length);
+        cardRead.classList.add("book_" + myLibrary.length);
+        removeBookBtn.classList.add('book_' + myLibrary.length, 'remove_button');
         book.innerText = "Book #" + (myLibrary.length);
         cardTitle.innerText = "Title: " + bookTitle.value;
         cardAuthor.innerText = "By: " + bookAuthor.value;
         cardPages.innerText = "Page Count: " + bookPages.value;
-        cardRead.innerText = bookReadString;
+        removeBookBtn.innerText = "Remove Book";
+        if (bookRead.checked === true) {
+            cardRead.innerText = "Read";
+            } else cardRead.innerText = "Not Read";
+        if (bookReadString === "Read") {
+            cardRead.classList.add('have_read')
+        } else cardRead.classList.add('not_read');
         cardSection.appendChild(book);
         book.appendChild(cardTitle);
         book.appendChild(cardAuthor);
         book.appendChild(cardPages);
         book.appendChild(cardRead);
+        book.appendChild(removeBookBtn);
 }
 
-function submit () {
-    addBookToLibrary();
-    overrideSubmit(event);
-    closeModal();
-    clearForm();
+function removeBook () {
+    for (let i = 0; i < myLibrary.length; i++) {
+        let removeBtn = document.querySelector('.book_' + [i])
+        removeBtn.addEventListener('click', () => {
+            myLibrary.splice([i]-1,1);
+        })
+    }
 }
+
+//let readButton = document.querySelectorAll('.have_read');
+//let notReadButtons = document.querySelectorAll('.not_read');
+
+/*notReadButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        notReadButtons.classList.remove('not_read'); 
+    })
+});
+
+function changeRead () {
+   notReadButtons.classList.add('have_read'); 
+}
+*/
 
 function displayCurrentLibrary () {
     for (let i=0; i < myLibrary.length; i++) {
@@ -95,14 +129,25 @@ function displayCurrentLibrary () {
         cardTitle.innerText = "Title: " + myLibrary[i].title;
         cardAuthor.innerText = "By: " + myLibrary[i].author;
         cardPages.innerText = "Page Count: " + myLibrary[i].pages;
-        cardRead.innerText = myLibrary[i].read;
+        if (myLibrary[i].read === true) {
+            cardRead.innerText = "Read";
+            } else cardRead.innerText = "Not Read";   
+        if (myLibrary[i].read === true) {
+            cardRead.classList.add('have_read')
+        } else cardRead.classList.add('not_read');
         cardSection.appendChild(book);
         book.appendChild(cardTitle);
         book.appendChild(cardAuthor);
         book.appendChild(cardPages);
         book.appendChild(cardRead);
-
     }
+}
+
+function submit () {
+    addBookToLibrary();
+    overrideSubmit(event);
+    closeModal();
+    clearForm();
 }
 
 displayCurrentLibrary();

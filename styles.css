@@ -54,6 +54,7 @@ body {
 #modal_title {
     margin-bottom: 20px;
 }
+
 form {
     display: flex;
     flex-direction: column;
@@ -115,7 +116,7 @@ label {
 
 #card_section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     flex: auto;
     width: 100%;
     background-color: aqua;
@@ -130,10 +131,15 @@ label {
     border-radius: 10px;
     margin: 30px;
     padding: 30px;
-    gap: 10px;
-    height: 50%;
+    gap: 30px;
+    max-height: 350px;
 
 }
+
+h2 {
+    font-size: 1.5rem;
+}
+
 #add_book {
     font-size: 2rem;
     background-color: var(--main_color);
@@ -147,6 +153,22 @@ label {
     border: solid black 2px;
 }
 
+.have_read {
+    background-color: greenyellow;
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
+
+.not_read {
+    background-color: red;
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
+
+.remove_button {
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
 #footer {
     background-color: var(--main_color);
     height: 5vh;
