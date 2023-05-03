@@ -15,13 +15,17 @@
         <div id="form_container" class="modal_content">
             <span id="close">&times;</span>
             <form>
-                <h2> Add a book</h2>
+                <h2 id="modal_title"> Add a book</h2>
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title">
                 <label for="author">Author</label>
                 <input type="text" name="author" id="author">
                 <label for="pages">Number of Pages</label>
                 <input type="number" name="pages" id="pages">
+                <div id="read_checkbox">
+                    <label for="read">Have you read it?</label>
+                    <input type="checkbox" id="read" name="read" checked>
+                </div>
                 <button type="submit" id="submit_book">Submit</button>
             </form>
         </div>

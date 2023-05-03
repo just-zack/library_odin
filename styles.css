@@ -50,6 +50,10 @@ body {
     padding: 20px;
     
 }
+
+#modal_title {
+    margin-bottom: 20px;
+}
 form {
     display: flex;
     flex-direction: column;
@@ -64,9 +68,14 @@ input {
 }
 
 label {
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
+#read_checkbox {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
 .modal-content {
     background-color: #fefefe;
     padding: 20px;
