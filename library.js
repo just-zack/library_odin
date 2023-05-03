@@ -15,7 +15,7 @@ window.onclick = function(event) {
       modal.style.display = "none";
     }
 }
-submitBook.addEventListener('click' , overrideSubmit);
+submitBook.addEventListener('click' , submit);
 
 function openModal () {
     modal.style.display = "flex";
@@ -25,11 +25,22 @@ function closeModal () {
     modal.style.display = "none";
 }
 
-function overrideSubmit (event) {
+function submit () {
     addBookToLibrary();
-    event.preventDefault();
+    overrideSubmit(event);
     closeModal();
+    clearForm();
 }
+
+function overrideSubmit (event) {
+    event.preventDefault();
+}
+
+ function clearForm () {
+    bookTitle.value = "";
+    bookAuthor.value = "";
+    bookPages.value = "";
+ }
 
 let myLibrary = [{title: "How to say hello", author : "john j", pages: 245, read: "not read"}, {title: "when chocolate", author: "Kristy", pages: 10, read: "not read"},];
 
