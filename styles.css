@@ -130,9 +130,10 @@ label {
     background-color: var(--secondary_color);
     border-radius: 10px;
     margin: 30px;
+    justify-content: center;
     padding: 30px;
     gap: 30px;
-    max-height: 350px;
+    max-height: 300px;
 
 }
 
@@ -153,13 +154,17 @@ h2 {
     border: solid black 2px;
 }
 
-.have_read {
+#have_read_id {
     background-color: greenyellow;
     font-size: 1.5rem;
     border-radius: 10px;
 }
 
-.not_read {
+.have_read {
+    background-color: greenyellow !important;
+}
+
+.read_button {
     background-color: red;
     font-size: 1.5rem;
     border-radius: 10px;

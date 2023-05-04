@@ -70,24 +70,23 @@ function createBookCard () {
         const cardPages = document.createElement('h2');
         const cardRead = document.createElement('button');
         const removeBookBtn = document.createElement('button');
-        book.classList.add('book_card', "book_" + myLibrary.length);
-        cardTitle.classList.add("book_" + myLibrary.length);
-        cardAuthor.classList.add("book_" + myLibrary.length);
-        cardPages.classList.add("book_" + myLibrary.length);
-        cardRead.classList.add("book_" + myLibrary.length);
+        book.classList.add('book_card', 't_' + bookTitle.value);
+        cardTitle.classList.add('t_' + bookTitle.value);
+        cardAuthor.classList.add('t_' + bookTitle.value);
+        cardPages.classList.add('t_' + bookTitle.value);
+        cardRead.classList.add('t_' + bookTitle.value);
         removeBookBtn.classList.add('remove_button');
-        removeBookBtn.setAttribute('id', "book_" + myLibrary.length);
-        book.innerText = "Book #" + (myLibrary.length);
+        removeBookBtn.setAttribute('id', 't_' + bookTitle.value);
+        cardRead.setAttribute('id', "read_" + myLibrary.length);
         cardTitle.innerText = "Title: " + bookTitle.value;
         cardAuthor.innerText = "By: " + bookAuthor.value;
         cardPages.innerText = "Page Count: " + bookPages.value;
         removeBookBtn.innerText = "Remove Book";
         if (bookRead.checked === true) {
             cardRead.innerText = "Read";
-            } else cardRead.innerText = "Not Read";
-        if (bookReadString === "Read") {
-            cardRead.classList.add('have_read')
-        } else cardRead.classList.add('not_read');
+            cardRead.classList.add('have_read', 'read_button');
+            } else {cardRead.innerText = "Not Read";
+            cardRead.classList.add('read_button'); }
         cardSection.appendChild(book);
         book.appendChild(cardTitle);
         book.appendChild(cardAuthor);
@@ -98,15 +97,7 @@ function createBookCard () {
 
 
 
-/* function removeBook () {
-    for (let i = 0; i < myLibrary.length; i++) {
-        let removeBtn = document.querySelector('.book_' + [i])
-        removeBtn.addEventListener('click', () => {
-            myLibrary.splice([i]-1,1);
-        })
-    }
-}
-
+/* 
 //let readButton = document.querySelectorAll('.have_read');
 //let notReadButtons = document.querySelectorAll('.not_read');
 
@@ -119,7 +110,7 @@ notReadButtons.forEach((button) => {
 function changeRead () {
    notReadButtons.classList.add('have_read'); 
 }
-*/
+
 
 function displayCurrentLibrary () {
     for (let i=0; i < myLibrary.length; i++) {
@@ -146,6 +137,7 @@ function displayCurrentLibrary () {
         book.appendChild(cardRead);
     }
 }
+*/
 
 function submit () {
     addBookToLibrary();
@@ -153,13 +145,48 @@ function submit () {
     closeModal();
     clearForm();
     deleteBook();
+    toggleRead();
 }
+
+
 function deleteBook () {
     const removeBook = document.querySelectorAll('.remove_button');
     removeBook.forEach((button) => {
         button.addEventListener('click', () => {
             const deleteItems = document.querySelectorAll('.' + button.id);
             deleteItems.forEach(element => element.remove());
+            let bookName = getBookTitle(button.id);
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].title === bookName) {
+                    myLibrary.splice(i, 1);
+                }
+            }
+        })
+    })
+}
+/*
+function matchBookTitle () {
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (myLibrary[i].title === bookName) {
+            myLibrary.splice(i, 1);
+        }
+    }
+}
+*/
+function getBookTitle(buttonID) {
+    let buttonIDString = buttonID.toString();
+    let bookName = buttonIDString.slice(2 , buttonIDString.length);
+    return bookName;
+}
+
+function toggleRead () {
+    const readBtn = document.querySelectorAll('.read_button');
+    readBtn.forEach((button) => {
+        button.addEventListener('click', ()=> {
+            const specificButton = document.getElementById('#' + button.id);
+            alert(button.id);
+            alert(specificButton.id);
+            specificButton.classList.toggle('have_read')
         })
     })
 }
