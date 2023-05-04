@@ -10,10 +10,7 @@ let submitBook = document.getElementById('submit_book');
 let bookReadString = "Read";
 var span = document.querySelector("#close");
 
-
-
 let myLibrary = [];
-
 
 addBook.addEventListener('click', openModal);
 span.addEventListener('click', closeModal);
@@ -77,7 +74,7 @@ function createBookCard () {
         cardRead.classList.add('t_' + bookTitle.value);
         removeBookBtn.classList.add('remove_button');
         removeBookBtn.setAttribute('id', 't_' + bookTitle.value);
-        cardRead.setAttribute('id', "read_" + myLibrary.length);
+        cardRead.setAttribute('id', "r_" + bookTitle.value);
         cardTitle.innerText = "Title: " + bookTitle.value;
         cardAuthor.innerText = "By: " + bookAuthor.value;
         cardPages.innerText = "Page Count: " + bookPages.value;
@@ -95,7 +92,48 @@ function createBookCard () {
         book.appendChild(removeBookBtn);
 }
 
+function toggleRead () {
+    const readBtn = document.querySelectorAll('.read_button');
+    readBtn.forEach((button) => {
+        button.addEventListener('click', () => {
+            const bookReadButton = document.getElementById(button.id);
+            bookReadButton.classList.toggle('have_read');
+            if (bookReadButton.innerText === 'Read') {
+            bookReadButton.innerText = 'Not Read';
+            } else { bookReadButton.innerText = 'Read'};
+            let bookName = getBookTitle(button.id);
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].title === bookName) {
+                    if (myLibrary[i].read == true) {
+                        myLibrary[i].read = false
+                    } else myLibrary[i].read = true;
+                }
+            }
+        })
+    })
+}
 
+function deleteBook () {
+    const removeBook = document.querySelectorAll('.remove_button');
+    removeBook.forEach((button) => {
+        button.addEventListener('click', () => {
+            const deleteItems = document.querySelectorAll('.' + button.id);
+            deleteItems.forEach(element => element.remove());
+            let bookName = getBookTitle(button.id);
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].title === bookName) {
+                    myLibrary.splice(i, 1);
+                }
+            }
+        })
+    })
+}
+
+function getBookTitle(buttonID) {
+    let buttonIDString = buttonID.toString();
+    let bookName = buttonIDString.slice(2 , buttonIDString.length);
+    return bookName;
+}
 
 /* 
 //let readButton = document.querySelectorAll('.have_read');
@@ -146,47 +184,7 @@ function submit () {
     clearForm();
     deleteBook();
     toggleRead();
+
 }
 
 
-function deleteBook () {
-    const removeBook = document.querySelectorAll('.remove_button');
-    removeBook.forEach((button) => {
-        button.addEventListener('click', () => {
-            const deleteItems = document.querySelectorAll('.' + button.id);
-            deleteItems.forEach(element => element.remove());
-            let bookName = getBookTitle(button.id);
-            for (let i = 0; i < myLibrary.length; i++) {
-                if (myLibrary[i].title === bookName) {
-                    myLibrary.splice(i, 1);
-                }
-            }
-        })
-    })
-}
-/*
-function matchBookTitle () {
-    for (let i = 0; i < myLibrary.length; i++) {
-        if (myLibrary[i].title === bookName) {
-            myLibrary.splice(i, 1);
-        }
-    }
-}
-*/
-function getBookTitle(buttonID) {
-    let buttonIDString = buttonID.toString();
-    let bookName = buttonIDString.slice(2 , buttonIDString.length);
-    return bookName;
-}
-
-function toggleRead () {
-    const readBtn = document.querySelectorAll('.read_button');
-    readBtn.forEach((button) => {
-        button.addEventListener('click', ()=> {
-            const specificButton = document.getElementById('#' + button.id);
-            alert(button.id);
-            alert(specificButton.id);
-            specificButton.classList.toggle('have_read')
-        })
-    })
-}
