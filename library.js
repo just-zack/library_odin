@@ -139,7 +139,6 @@ function deleteBook (titleID) {
 function getBookTitle(buttonID) {
     let buttonIDString = buttonID.toString();
     let bookName = buttonIDString.slice(2 , buttonIDString.length);
-   // bookName = bookName.replace(/\s+/g, '');
     return bookName;
 }
 
