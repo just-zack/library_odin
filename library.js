@@ -57,7 +57,7 @@ function addBookToLibrary() {
     if (bookTitle.value !== "" && bookAuthor.value !== "" && bookPages.value !== "") {
         myLibrary.push(new Book(bookTitle.value,bookAuthor.value,bookPages.value,bookRead.checked));
         createBookCard ();
-    } else alert ("You're missing information!");
+    } else {alert ("You're missing information!")};
 }
 
 function createBookCard () {
@@ -68,14 +68,16 @@ function createBookCard () {
         const cardRead = document.createElement('button');
         const removeBookBtn = document.createElement('button');
         let bookTitleNoSpaces = bookTitle.value.split(' ').join('');
-        book.classList.add('book_card', 't_' + bookTitleNoSpaces);
-        cardTitle.classList.add('t_' + bookTitleNoSpaces);
-        cardAuthor.classList.add('t_' + bookTitleNoSpaces);
-        cardPages.classList.add('t_' + bookTitleNoSpaces);
-        cardRead.classList.add('t_' + bookTitleNoSpaces);
+        let readID = "r_" + bookTitleNoSpaces;
+        let titleID = 't_' + bookTitleNoSpaces
+        book.classList.add('book_card', titleID);
+        cardTitle.classList.add(titleID);
+        cardAuthor.classList.add(titleID);
+        cardPages.classList.add(titleID);
+        cardRead.classList.add(titleID);
         removeBookBtn.classList.add('remove_button');
-        removeBookBtn.setAttribute('id', 't_' + bookTitleNoSpaces);
-        cardRead.setAttribute('id', "r_" + bookTitleNoSpaces);
+        removeBookBtn.setAttribute('id', titleID);
+        cardRead.setAttribute('id', readID);
         cardTitle.innerText = "Title: " + bookTitle.value;
         cardAuthor.innerText = "By: " + bookAuthor.value;
         cardPages.innerText = "Page Count: " + bookPages.value;
@@ -91,38 +93,38 @@ function createBookCard () {
         book.appendChild(cardPages);
         book.appendChild(cardRead);
         book.appendChild(removeBookBtn);
+        toggleRead(readID);
+        deleteBook(titleID);
+
 }
 
-function toggleRead () {
-    const readBtn = document.querySelectorAll('.read_button');
-    readBtn.forEach((button) => {
-        button.addEventListener('click', () => {
-            const bookReadButton = document.getElementById(button.id);
-            bookReadButton.classList.toggle('have_read');
-            if (bookReadButton.innerText === 'Read') {
-            bookReadButton.innerText = 'Not Read';
-            } else { bookReadButton.innerText = 'Read'};
-            let bookName = getBookTitle(button.id);
-            for (let i = 0; i < myLibrary.length; i++) {
-                let myLibraryTitle = myLibrary[i].title;
-                myLibraryTitle = myLibraryTitle.replace(/\s+/g, '');
-                if (myLibraryTitle === bookName) {
-                    if (myLibrary[i].read == true) {
-                        myLibrary[i].read = false
-                    } else myLibrary[i].read = true;
-                }
+function toggleRead (readID) {
+    const readBtn = document.getElementById(readID);
+    readBtn.addEventListener('click', () => {
+        readBtn.classList.toggle('have_read');
+        if (readBtn.innerText === 'Read') {
+        readBtn.innerText = 'Not Read';
+        } else { readBtn.innerText = 'Read'};
+        let bookName = getBookTitle(readID);
+        for (let i = 0; i < myLibrary.length; i++) {
+            let myLibraryTitle = myLibrary[i].title;
+            myLibraryTitle = myLibraryTitle.replace(/\s+/g, '');
+            if (myLibraryTitle === bookName) {
+                if (myLibrary[i].read == true) {
+                    myLibrary[i].read = false
+                } else myLibrary[i].read = true;
             }
-        })
+        }
     })
+
 }
 
-function deleteBook () {
-    const removeBook = document.querySelectorAll('.remove_button');
-    removeBook.forEach((button) => {
-        button.addEventListener('click', () => {
-            const deleteItems = document.querySelectorAll('.' + button.id);
+function deleteBook (titleID) {
+    const removeBook = document.getElementById(titleID);
+    removeBook.addEventListener('click', () => {
+            const deleteItems = document.querySelectorAll('.' + titleID);
             deleteItems.forEach(element => element.remove());
-            let bookName = getBookTitle(button.id);
+            let bookName = getBookTitle(titleID);
             for (let i = 0; i < myLibrary.length; i++) {
                 let myLibraryTitle = myLibrary[i].title;
                 myLibraryTitle = myLibraryTitle.replace(/\s+/g, '');
@@ -131,7 +133,7 @@ function deleteBook () {
                 }
             }
         })
-    })
+    
 }
 
 function getBookTitle(buttonID) {
@@ -146,9 +148,6 @@ function submit () {
     overrideSubmit(event);
     closeModal();
     clearForm();
-    deleteBook();
-    toggleRead();
-
 }
 
 /* Known bug where if you repeat the title, it does some wonky things on button clicks*/
