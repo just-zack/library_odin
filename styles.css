@@ -104,6 +104,8 @@ label {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
+    border-bottom: solid 2px var(--tertiary_color);
+    box-shadow: 1px 1px 2px;
 }
 
 #library_text {
@@ -183,7 +185,7 @@ h2 {
 
 #footer {
     background-color: var(--secondary_color);
-    height: 5vh;
+    border-top: solid 2px var(--tertiary_color);
 }
 
 #made_by {
