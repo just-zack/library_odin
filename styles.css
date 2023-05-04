@@ -118,7 +118,7 @@ label {
 
 #card_section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     flex: auto;
     width: 100%;
 }
@@ -145,17 +145,18 @@ h2 {
 
 #add_book {
     font-size: 2rem;
-    background-color: var(--main_color);
-    border: none;
+    background-color: var(--secondary_color);
+    border: solid var(--tertiary_color) 2px;
+    box-shadow: 1px 2px 5px;
     border-radius: 10px;
     margin: 30px;
     padding: 10px;   
 }
 
 #add_book:hover {
-    border: solid var(--tertiary_color) 2px;
-    background-color: var(--secondary_color);
-    color: var(--tertiary_color);
+    border: solid var(--main_color) 2px;
+    background-color: var(--tertiary_color);
+    color: var(--main_color);
     box-shadow: 1px 2px 5px;
 }
 

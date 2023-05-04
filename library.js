@@ -151,4 +151,5 @@ function submit () {
 
 }
 
+/* Known bug where if you repeat the title, it does some wonky things on button clicks*/
 
